@@ -25,6 +25,7 @@
   home.packages = with pkgs; [
     bat
     btop
+    delta
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -44,6 +45,20 @@
     enable = true;
     extraConfig = {
       core.editor="code --wait";
+      core.pager = "delta";
+      delta.hyperlinks = true;
+      delta.hyperlinks-file-link-format = "vscode://file/{path}:{line}";
+      delta.navigate = true;
+      delta.side-by-side = true;
+      help.autoCorrect = "prompt";
+      interactive.diffFIlter = "delta";
+      merge.conflictStyle = "diff3";
+      pull.rebase = false;
+      push.default = "simple";
+      push.autoSetupRemote = true;
+      rebase.autoSquash = true;
+      rerere.enabled = true;
+      status.submoduleSummary = true;
       user.name = "Tizzy Saurus";
       user.email = "tizzysaurus@gmail.com";
     };
