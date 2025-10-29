@@ -99,6 +99,69 @@
     autosuggestion.enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      cz = "code ~/.zshrc";
+      rs = "source ~/.zshrc";
+      rmrfnm = "rm -rf **/node_modules/";
+
+      # git aliases
+      ga = "git add";
+      "ga." = "git add .";
+      gap = "git add -p";
+      gau = "git add -u";
+      gb = "git branch"; # TODO: Add my better-git-branch script
+      gbd = "git branch -D";
+      gbl = "git blame -w -C -C -C";
+      gc = "git commit";
+      gca = "git commit --amend";
+      gcaa = "git commit -a --amend";
+      gcae = "git commit --allow-empty --no-verify -m 'Trigger Build'";
+      gcam = "git commit --amend -m";
+      gcl = "git clone";
+      gclfd = "git clean -fd";
+      gcm = "git commit -m";
+      gco = "git checkout";
+      gcob = "git checkout -b";
+      gcom = "git checkout main && git pull && git fetch";
+      gcp = "git cherry-pick";
+      gcpa = "git cherry-pick --abort";
+      gcpc = "git cherry-pick --continue";
+      gd = "git diff";
+      gdm = "git diff main";
+      gds = "git diff --staged";
+      gdsw = "git diff --staged -w";
+      gdw = "git diff -w";
+      gf = "git fetch";
+      gl = "git log";
+      glo = "git log --oneline";
+      glol = "git log --oneline -L";
+      glor = "git log --oneline --revert";
+      glou = "git log --oneline @{u}..";
+      gm = "git merge";
+      gmm = "git merge main";
+      gp = "git push";
+      gpf = "git push --force-with-lease";
+      gpu = "git pull";
+      gr = "git restore";
+      gra = "git rebase --abort";
+      grc = "git rebase --continue";
+      grh = "git reset --hard";
+      grhh = "git reset --hard HEAD";
+      gri = "git rebase -i";
+      grim = "git rebase -i main";
+      grmc = "git rm --cached";
+      grs = "git restore --staged";
+      grv = "git remote -v";
+      gs = "git show";
+      gsh = "git show HEAD";
+      gsp = "git stash pop";
+      gsw = "git switch";
+      gst = "git status";
+      gsync = "git stash --all && git fetch upstream main && gcom && git merge upstream/main && gco - && gmm && gsp";
+      gwta = "git worktree add";
+      gwtr = "git worktree remove";
+    };
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
