@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib,  ... }:
 
 # TODO: Investigate https://nix-community.github.io/home-manager/options.xhtml
 
@@ -94,11 +94,40 @@
     #}
   };
 
+  # https://github.com/nix-community/home-manager/blob/release-25.05/modules/programs/zsh.nix
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+
+    history = {
+      append = true; # APPEND_HISTORY
+      extended = true; # EXTENDED_HISTORY
+      findNoDups = true; # HIST_FIND_NO_DUPS
+      ignoreDups = false; # HIST_IGNORE_DUPS
+      ignoreAllDups = false; # HIST_IGNORE_ALL_DUPS
+
+      # ignorePatterns = literalExpression ''[ "rm *" "pkill *" ]'';
+      size = 10000; # NB: default is 10k
+    };
+
+    initContent = let
+      zshConfigEarlyInit = lib.mkOrder 500 ''
+        setopt INC_APPEND_HISTORY_TIME
+        setopt PROMPT_SUBST
+      '';
+      zshConfig = lib.mkOrder 1000 ''
+        function parse_git_branch() {
+            branch=$(git branch --show-current 2> /dev/null)
+            if [ -n "$branch" ]; then
+                echo " %F{33}($branch)%f"
+            fi
+        }
+        export PROMPT='%(?.%F{green}√.%F{red}X)%f %F{165}%D{%a %d %b}%f %F{165}%D{%H:%M}%f %F{44}%(5~!%-2~/.../%2~!%~)%f %$(parse_git_branch) %# '
+        setopt INC_APPEND_HISTORY_TIME
+      '';
+    in lib.mkMerge [ zshConfigEarlyInit zshConfig ];
 
     shellAliases = {
       cz = "code ~/.zshrc";
