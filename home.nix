@@ -33,7 +33,6 @@
     kdePackages.kate
     immich
     immich-cli
-    python312
     python314
     speedtest-cli
     spotify
