@@ -1,6 +1,13 @@
 { config, pkgs, lib,  ... }:
 
 # TODO: Investigate https://nix-community.github.io/home-manager/options.xhtml
+# TODO: Dynamic system monitor pages
+# TODO: Immich setup
+# TODO: VSC keybinds
+# TODO: Re-investigate RDP(?)
+# TODO: Ghostty instead of Konsole(?)
+# TODO: Helium instead of Brave(?)
+# TODO: GIMP(?)
 
 {
   # Let Home Manager install and manage itself.
