@@ -23,9 +23,22 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    _1password-gui
+    _1password-cli
     bat
+    brave
     btop
     delta
+    discord
+    kdePackages.kate
+    immich
+    immich-cli
+    python312
+    python314
+    speedtest-cli
+    spotify
+    tailscale
+    vscode
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

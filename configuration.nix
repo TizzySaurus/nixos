@@ -132,22 +132,6 @@
     isNormalUser = true;
     description = "Tizzy Saurus";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      _1password-gui
-      _1password-cli
-      kdePackages.kate
-      brave
-      discord
-      immich
-      immich-cli
-      python312
-      python314
-      speedtest-cli
-      spotify
-      tailscale
-      vscode
-    #  thunderbird
-    ];
   };
 
   # Install firefox?
