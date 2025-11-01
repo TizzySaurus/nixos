@@ -171,6 +171,18 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+
+    # Always allow traffic from Tailscale network
+    trustedInterfaces = [ "tailscale0" ];
+
+    # Allow Tailscale UDP port through the firewall
+    allowedUDPPorts = [ config.services.tailscale.port ];
+
+    # Allow SSH in over the public internet
+    #networking.firewall.allowedTCPPorts = [ 22 ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
