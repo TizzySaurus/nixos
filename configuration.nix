@@ -18,16 +18,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-ac6e8ec4-7789-4a21-93f6-065ffa6cf913".device = "/dev/disk/by-uuid/ac6e8ec4-7789-4a21-93f6-065ffa6cf913";
-  networking.hostName = "nixos-sir"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  services.resolved.enable = true;
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -151,7 +141,13 @@
   #  wget
   ];
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    
+    extraUpFlags = [  "--advertise-exit-node" ];
+    extraSetFlags = [ "--accept-dns=false" ];
+    useRoutingFeatures = "both";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -167,12 +163,21 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.hostName = "nixos-sir"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # Tailscale networking
+  services.resolved.enable = true;
+  networking.networkmanager.enable = true;
   networking.firewall = {
     enable = true;
+
+    # https://github.com/tailscale/tailscale/issues/4432#issuecomment-1112819111
+    checkReversePath = "loose";
 
     # Always allow traffic from Tailscale network
     trustedInterfaces = [ "tailscale0" ];
@@ -181,7 +186,7 @@
     allowedUDPPorts = [ config.services.tailscale.port ];
 
     # Allow SSH in over the public internet
-    #networking.firewall.allowedTCPPorts = [ 22 ];
+    allowedTCPPorts = [ 22 ];
   };
 
   # This value determines the NixOS release from which the default
