@@ -30,13 +30,11 @@
     btop
     delta
     discord
-    kdePackages.kate
     immich
     immich-cli
     python314
     speedtest-cli
     spotify
-    tailscale
     vscode
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
