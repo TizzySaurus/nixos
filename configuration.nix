@@ -144,6 +144,7 @@
   services.tailscale = {
     enable = true;
     
+    # TODO: https://tailscale.com/kb/1320/performance-best-practices#linux-optimizations-for-subnet-routers-and-exit-nodes
     extraUpFlags = [  "--advertise-exit-node" ];
     extraSetFlags = [ "--accept-dns=false" ];
     useRoutingFeatures = "both";
