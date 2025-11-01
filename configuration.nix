@@ -133,6 +133,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    ethtool
     home-manager
     git
     tailscale
@@ -141,10 +142,33 @@
   #  wget
   ];
 
+  # https://tailscale.com/kb/1320/performance-best-practices#linux-optimizations-for-subnet-routers-and-exit-nodes
+  systemd.services.tailscale-exitnode-optimisations = {
+    description = "Enable GRO optimisations for Tailscale Exit Node";
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = [
+        "${pkgs.bash}/bin/bash" 
+        "-c" 
+        ''
+          NETDEV=$(${pkgs.iproute2}/bin/ip -o route get 8.8.8.8 | ${pkgs.gawk}/bin/awk '{print $5; exit}')
+          if [ -n "$NETDEV" ]; then
+            sudo ${pkgs.ethtool}/bin/ethtool -K "$NETDEV" rx-udp-gro-forwarding on rx-gro-list off
+            echo "Enabled GRO optimisations on $NETDEV"
+          else
+            echo "No network device found for default route; skipping GRO optimisation."
+          fi
+        ''
+      ];
+    };
+    wantedBy = [ "multi-user.target" ];
+  };
+
   services.tailscale = {
     enable = true;
-    
-    # TODO: https://tailscale.com/kb/1320/performance-best-practices#linux-optimizations-for-subnet-routers-and-exit-nodes
+
     extraUpFlags = [  "--advertise-exit-node" ];
     extraSetFlags = [ "--accept-dns=false" ];
     useRoutingFeatures = "both";
