@@ -41,6 +41,7 @@
     immich-cli
     libreoffice-qt
     protonup
+    prismlauncher
     python314
     speedtest-cli
     spotify
