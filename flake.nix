@@ -14,6 +14,7 @@
     nixosConfigurations.nixos-sir = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
+
       modules = [
         # Your system configuration file
         ./configuration.nix

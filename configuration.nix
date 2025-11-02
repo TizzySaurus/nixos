@@ -136,11 +136,20 @@
     ethtool
     home-manager
     git
+    lutris
+    mangohud
     tailscale
     vim
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
   ];
+
+  programs.gamemode.enable = true;
+
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
 
   # https://tailscale.com/kb/1320/performance-best-practices#linux-optimizations-for-subnet-routers-and-exit-nodes
   systemd.services.tailscale-exitnode-optimisations = {
