@@ -39,6 +39,7 @@
     discord
     immich
     immich-cli
+    libreoffice-qt
     python314
     speedtest-cli
     spotify
