@@ -38,6 +38,7 @@
       };
     };
   };
+  hardware.xone.enable = true;
 
   # Enable OpenGL
   hardware.graphics = {
