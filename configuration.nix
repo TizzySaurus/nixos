@@ -24,6 +24,21 @@
 
   # NB: The following lines up-to and include hardware.nvidia are to enable Nvidia GPU support, per https://nixos.wiki/wiki/Nvidia
 
+  # Enable bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+        FastConnectable = true;
+      };
+      Policy = {
+        AutoEnable = true;
+      };
+    };
+  };
+
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
