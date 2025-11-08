@@ -22,6 +22,12 @@
   # Set your time zone.
   time.timeZone = "Europe/London";
 
+  # Enable support for .AppImage files
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
   # NB: The following lines up-to and include hardware.nvidia are to enable Nvidia GPU support, per https://nixos.wiki/wiki/Nvidia
 
   # Enable bluetooth
