@@ -162,6 +162,7 @@
   environment.systemPackages = with pkgs; [
     ethtool
     home-manager
+    gearlever
     git
     lutris
     mangohud
