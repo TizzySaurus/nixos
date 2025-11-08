@@ -26,6 +26,11 @@
   programs.appimage = {
     enable = true;
     binfmt = true;
+    package = pkgs.appimage-run.override {
+      extraPkgs = pkgs: [
+        pkgs.kdePackages.qtbase
+      ];
+    };
   };
 
   # NB: The following lines up-to and include hardware.nvidia are to enable Nvidia GPU support, per https://nixos.wiki/wiki/Nvidia
