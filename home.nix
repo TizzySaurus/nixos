@@ -6,7 +6,6 @@
 # TODO: VSC keybinds
 # TODO: Re-investigate RDP(?)
 # TODO: Ghostty instead of Konsole(?)
-# TODO: Helium instead of Brave(?)
 # TODO: GIMP(?)
 
 {
