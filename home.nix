@@ -42,6 +42,7 @@
     libreoffice-qt
     # mangojuice
     protonup
+    protonvpn-gui
     prismlauncher
     python314
     speedtest-cli
