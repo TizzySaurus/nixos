@@ -14,6 +14,10 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
  
   # Bootloader.
+  boot.extraModulePackages = with config.boot.kernelPackages; [xpadneo];
+  boot.extraModprobeConfig = ''
+    options bluetooth disable_ertm=Y
+  '';
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -42,6 +46,11 @@
     settings = {
       General = {
         Experimental = true;
+        # https://www.reddit.com/r/NixOS/comments/1ch5d2p/comment/lkbabax/
+        # for pairing bluetooth controller
+        Privacy = "device";
+        JustWorksRepairing = "always";
+        Class = "0x000100";
         FastConnectable = true;
       };
       Policy = {
@@ -49,7 +58,7 @@
       };
     };
   };
-  hardware.xone.enable = true;
+  hardware.xpadneo.enable = true;
 
   # Enable OpenGL
   hardware.graphics = {
