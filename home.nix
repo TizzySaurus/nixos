@@ -48,6 +48,7 @@
     speedtest-cli
     spotify
     tldr
+    tree
     vscode
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
