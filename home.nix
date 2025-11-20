@@ -47,6 +47,7 @@
     python314
     speedtest-cli
     spotify
+    tldr
     vscode
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
