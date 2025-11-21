@@ -10,6 +10,21 @@
       ./hardware-configuration.nix
     ];
 
+  fileSystems."/mnt/media" = {
+    device = "/dev/disk/by-label/Photos";
+    fsType = "ntfs-3g";
+    options = [
+      "rw" # allow read & write
+      "noatime" # don't store 'last read at xxx' metadata
+      "x-systemd.automount" # don't mount the drive until something tries to access it
+      # NB: Below is only needed since it's ntfs
+      "uid=1000"               # your user’s UID (check with id -u)
+      "gid=100"               # your user’s GID (check with id -g)
+      "windows_names"          # keep strict Windows-compatible filenames
+      "big_writes"             # better performance
+    ];
+  };
+
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
  
